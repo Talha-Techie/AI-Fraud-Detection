@@ -1,24 +1,51 @@
-# Fraud detection model with FastAPI
+# Fraud Detection API
 
-![API doc](data/screenshot.png "API doc")
+<p align="center">
+  <strong>Containerized machine-learning service for training, validating, and serving bank-transaction fraud predictions with LightGBM and FastAPI.</strong>
+</p>
 
-This project is an example of a fully packaged machine learning model that can be readily deployed in any computing
-environment:
+<p align="center">
+  <a href="#"><img src="https://img.shields.io/badge/Python-3.9%2B-3776AB" alt="Python"></a>
+  <a href="#"><img src="https://img.shields.io/badge/FastAPI-REST API-009688" alt="FastAPI"></a>
+  <a href="#"><img src="https://img.shields.io/badge/LightGBM-ML-02569B" alt="LightGBM"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Docker-Ready-2496ED" alt="Docker"></a>
+  <a href="#"><img src="https://img.shields.io/badge/License-MIT-2EA44F" alt="License"></a>
+</p>
 
-- Gradient boosted trees as the core model using Microsoft's LightGBM implementation,
-- Model training and finetuning using random search optimization,
-- model exposition as a REST API using FastAPI framework,
-- Docker to package the whole thing in a containerized run environment
+<p align="center">
+  <a href="https://github.com/Talha-Techie">GitHub Profile</a> ·
+  <a href="#quick-start">Quick Start</a> ·
+  <a href="#architecture">Architecture</a> ·
+  <a href="#security">Security</a>
+</p>
 
-The API exposes three end-points:
+---
 
-- `/train` to train and finetune the model on (X, y) training datasets fetched from a remote source. The data is pulled
-  upon route call (design choice for the sake of simplicity) where a dedicated method in `app.services.data` handles
-  that tu allow for easy modification.
-- `/validation` to evaluate the model performance using cross-validation and report metrics on (X, y) validation
-  datasets fetched from a remote source,
-- `/prediction` for inference on a dataset passed as payload. It needs to be a list of samples but this list can contain
-  only one item for point inference.
+## Overview
+
+**Fraud Detection API** packages a bank-transaction fraud classifier as a deployable machine-learning service. The project uses Microsoft LightGBM gradient-boosted trees, random-search model tuning, FastAPI endpoints for the ML lifecycle, and Docker for portable deployment.
+
+The model targets a binary classification problem over more than 20,000 transaction records with 112 numerical features, with model tuning focused on **recall** so the system prioritizes identifying fraudulent transactions.
+
+### Business / Engineering Value
+
+- End-to-end ML lifecycle: training, validation, and inference.
+- LightGBM gradient-boosted tree classifier.
+- Random-search hyperparameter optimization.
+- Recall-focused fraud detection objective.
+- FastAPI model serving and Docker packaging.
+
+## Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Model | LightGBM |
+| Optimization | Random search |
+| API | FastAPI |
+| Problem | Binary classification |
+| Packaging | Docker |
+
+---
 
 ## Context
 
@@ -34,7 +61,7 @@ transactions.
 Clone the repository in a local directory:
 
 ```
-git clone https://github.com/clabrugere/fastapi-fraud-detection.git
+git clone https://github.com/Talha-Techie/fastapi-fraud-detection.git
 ```
 
 Now you can either run the api locally or in a container.
@@ -76,3 +103,62 @@ docker run -d --name fastapi-fraud-detection-instance -p 80:80 fastapi-fraud-det
 ## License
 
 [MIT](LICENSE)
+
+---
+
+## Security
+
+For production use, treat uploaded documents, prompts, model outputs, credentials, user data, and tool/API responses as potentially sensitive.
+
+Recommended controls include:
+
+- Keep secrets in environment variables or a dedicated secret manager.
+- Never commit `.env` files, API keys, database passwords, or tokens.
+- Validate and constrain all external inputs before processing.
+- Apply authentication and authorization to production endpoints where appropriate.
+- Use least-privilege access for databases, tools, cloud resources, and service accounts.
+- Enforce HTTPS/TLS at the deployment boundary.
+- Add request limits, timeouts, structured logging, and dependency scanning.
+- Review model/tool outputs before allowing irreversible actions.
+
+> Security, compliance, SSO, RBAC, or enterprise governance capabilities should only be advertised when they are implemented and verified in the deployed environment.
+
+## Production Considerations
+
+Before operating this project in a production environment, consider adding or validating:
+
+- Centralized logs and metrics
+- Health and readiness checks
+- Request tracing and correlation IDs
+- Rate limiting and abuse controls
+- Persistent state and backup strategy
+- CI/CD quality gates
+- Dependency and container vulnerability scanning
+- Model/LLM latency, reliability, and cost monitoring where applicable
+- Horizontal scaling and externalized state where required
+
+## Contributing
+
+Contributions are welcome.
+
+```bash
+git checkout -b feature/your-feature
+git add .
+git commit -m "feat: describe your change"
+git push origin feature/your-feature
+```
+
+When opening a pull request, include the motivation, implementation summary, testing performed, and any API or architecture implications.
+
+## Maintainer
+
+Maintained by **Talha-Techie**.
+
+- GitHub: [github.com/Talha-Techie](https://github.com/Talha-Techie)
+
+
+---
+
+<p align="center">
+  <strong>Designed as a clean, modular, production-oriented AI/ML engineering project.</strong>
+</p>
